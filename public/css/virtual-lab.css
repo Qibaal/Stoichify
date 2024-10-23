@@ -1,0 +1,435 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  background-color: #D9D3EC;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1280px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.guide {
+  flex: 1;
+  min-width: 300px;
+  background-color: #ffc8dd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.guide h1 {
+  color: #8338ec;
+}
+
+.basic-steps {
+  color: #8338ec;
+}
+
+.example {
+  background-color: #bde0fe;
+  border-radius: 10px;
+  padding: 4px 20px 8px;
+  margin-top: 32px;
+}
+
+.example p {
+  font-size: 14px;
+  color: #1d3557;
+  font-weight: 600;
+}
+
+.example li {
+  font-size: 14px;
+  color: #1d3557;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+ol {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.key-formulas {
+  margin-top: 32px;
+}
+
+.key-formulas h2 {
+  color: #8338ec;
+}
+
+.key-formulas p {
+  background-color: #e3f2fd;
+  color: #8338ec;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.game {
+  flex: 2;
+  min-width: 300px;
+  background-color: #fefae0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.score p {
+  font-weight: 700;
+  font-size: 18px;
+  margin: 8px 0;
+  color: #e9c46a;
+}
+
+.heart {
+  width: 24px;
+  height: 24px;
+}
+
+.reaction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  margin-bottom: 20px;
+  padding: 24px 0;
+  border-radius: 10px;
+}
+
+.drop-zone {
+  width: 120px;
+  height: 120px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.beaker {
+  text-align: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  background-color: paleturquoise;
+}
+
+.beaker.acid:hover {
+  transform: scale(1.1); /* Membesarkan 10% */
+}
+
+.beaker.base:hover {
+  transform: scale(1.1); /* Membesarkan 10% */
+}
+
+.beaker.acid {
+  background-color: #f72585;
+  color: white;
+}
+
+.beaker.base {
+  background-color: #4cc9f0;
+  color: white;
+}
+
+.beaker img {
+  width: 60px;
+  padding: 10px 10px 0;
+}
+
+.beaker p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.arrow img {
+  width: 40px;
+  height: 40px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.beaker-grid-acid {
+  width: 50%;
+  display: grid;
+  grid-row: auto;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.beaker-grid-base {
+  width: 50%;
+  display: grid;
+  grid-row: auto;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: end;
+}
+
+.beaker-grid img {
+  width: 60px;
+  padding: 10px 10px 0;
+  border-radius: 5px;
+}
+
+.mgoh2 {
+  grid-column: 2; /* Move this div to the second column */
+}
+
+.arrow-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.correct-icon {
+  display: none;
+  width: 60px;
+  height: 60px;
+}
+
+.false-icon {
+  display: none;
+  width: 60px;
+  height: 60px;
+}
+
+.lose-icon {
+  display: none;
+  width: 60px;
+  height: 60px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Translucent dark */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* Dialog box styling */
+.dialog {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+/* Image styling */
+.dialog-image {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+/* Text styling */
+.dialog.h2 {
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.retry-btn {
+  background-color: #c4c4c4;
+  color: white;
+}
+
+.menu-btn {
+  background-color: #d3d3d3;
+  color: black;
+}
+
+/* Only for virtual lab */
+
+.drop-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.mol-carousel {
+  width: 100%;
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.mol-carousel-counter {
+  background-color: white;
+  padding: 0 16px;
+  border-radius: 10px;
+}
+
+.mol-carousel img {
+  width: 24px;
+  height: 24px;
+}
+
+.product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.mol-result-container {
+  background-color: white;
+  border-radius: 10px;
+  padding: 0 24px;
+}
+
+.mol-result-container.one {
+  display: none;
+}
+
+.mol-result-container.two {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .reaction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 24px 0;
+    border-radius: 10px;
+  }
+
+  .drop-zone {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arrow-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .beaker {
+    width: 100px;
+    height: 100px;
+  }
+
+  .beaker img {
+    width: 50px;
+    padding: 10px 10px 0;
+  }
+
+  .mol-carousel-counter {
+    background-color: white;
+    padding: 0 16px;
+    border-radius: 4px;
+  }
+  
+  .mol-carousel img {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .guide {
+    order: 2;
+  }
+
+  .drop-zone {
+    width: 60px;
+    height: 80px;
+  }
+
+  .arrow-icon {
+    width: 20px;
+    height: 40px;
+  }
+
+  .beaker {
+    width: 60px;
+    height: 80px;
+  }
+
+  .beaker img {
+    width: 35px;
+    padding: 10px 10px 0;
+  }
+
+  .beaker p {
+    font-size: 12px;
+  }
+
+  .beaker-grid-acid {
+    gap: 0;
+    row-gap: 15px;
+  }
+  
+  .beaker-grid-base {
+    gap: 0;
+    row-gap: 15px;
+  }
+}

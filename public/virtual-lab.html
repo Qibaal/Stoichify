@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/virtual-lab.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Stoichiometry Lab</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Guide Sidebar -->
+      <div class="guide">
+        <h1>Stoichiometry Guide</h1>
+        <div class="basic-steps">
+          <h2>Basic Steps</h2>
+          <ol>
+            <li>Balance the chemical equation</li>
+            <li>Convert given mass/volume to moles</li>
+            <li>Use molar ratios to find moles of product</li>
+            <li>Convert moles to requested unit</li>
+          </ol>
+        </div>
+        <div class="example">
+          <h2>Example Calculation</h2>
+          <p>Problem:</p>
+          <p>HCl + NaOH &rarr; NaCl + H<sub>2</sub>O</p>
+          <p>Given: 100 mL of 0.5 M HCl and 100 mL of 0.25 M NaOH</p>
+          <ol>
+            <li>
+              Calculate moles of HCl:<br />0.5 M &times; 0.1 L = 0.05 moles
+            </li>
+            <li>
+              Calculate moles of NaOH:<br />0.25 M &times; 0.1 L = 0.025 moles
+            </li>
+            <li>
+              Determine limiting reagent:<br />NaOH (0.025 moles) is limiting
+            </li>
+            <li>Calculate product:<br />0.025 moles NaCl will form</li>
+          </ol>
+        </div>
+        <div class="key-formulas">
+          <h2>Key Formulas</h2>
+          <p>
+            Molarity <strong>(M)</strong> = moles/liters<br />Moles = Molarity &times; Volume
+            (L)<br />Moles = Mass/Molar Mass
+          </p>
+        </div>
+      </div>
+
+      <!-- Virtual Lab -->
+      <div class="game">
+        <div class="score">
+          <p>
+            Learn to mix acids and bases, <strong>have fun exploring!</strong>
+          </p>
+        </div>
+
+        <div class="reaction">
+          <!-- Reagen Choice -->
+          <div class="drop-container">
+            <div class="drop-zone" id="drop1" draggable="false"></div>
+            <div class="mol-carousel">
+              <img
+                src="assets/left-chevron.png"
+                alt="left-chevron"
+                class="left-chevron"
+              />
+              <div class="mol-carousel-counter">
+                <p id="carousel-counter1" data-value="1"><strong>1</strong></p>
+              </div>
+              <img
+                src="assets/right-chevron.png"
+                alt="right-chevron"
+                class="right-chevron"
+              />
+            </div>
+          </div>
+
+          <div class="drop-container">
+            <div class="drop-zone" id="drop2" draggable="false"></div>
+            <div class="mol-carousel">
+              <img
+                src="assets/left-chevron.png"
+                alt="left-chevron"
+                class="left-chevron"
+              />
+              <div class="mol-carousel-counter">
+                <p id="carousel-counter2" data-value="1"><strong>1</strong></p>
+              </div>
+              <img
+                src="assets/right-chevron.png"
+                alt="right-chevron"
+                class="right-chevron"
+              />
+            </div>
+          </div>
+
+          <img
+            class="arrow-icon"
+            src="assets/arrow-right.png"
+            alt="Reaction Arrow"
+          />
+
+          <!-- Product -->
+          <div class="product-container">
+            <div id="product1" class="beaker">
+              <img src="assets/beaker3.png" alt="NaCl" />
+              <p>Product</p>
+            </div>
+            <div class="mol-result-container one">
+              <p id="mol-result1"><strong>1</strong></p>
+            </div>
+          </div>
+
+          <div class="product-container">
+            <div id="product2" class="beaker">
+              <img src="assets/beaker1.png" alt="beaker" />
+              <p>Product</p>
+            </div>
+            <div class="mol-result-container two">
+              <p id="mol-result2"><strong>1</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <!-- Acid Only -->
+          <div class="beaker-grid-acid">
+            <div class="drop-zone" id="acid1">
+              <div id="beaker1" class="beaker acid" draggable="true">
+                <img src="assets/beaker1.png" alt="beaker" />
+                <p>HCl</p>
+              </div>
+            </div>
+            <div class="drop-zone" id="acid2">
+              <div id="beaker2" class="beaker acid" draggable="true">
+                <img src="assets/beaker2.png" alt="beaker" />
+                <p>H₂SO₄</p>
+              </div>
+            </div>
+            <div class="drop-zone" id="acid3">
+              <div id="beaker3" class="beaker acid" draggable="true">
+                <img src="assets/beaker3.png" alt="beaker" />
+                <p>HNO₃</p>
+              </div>
+            </div>
+            <div class="drop-zone" id="acid4">
+              <div id="beaker4" class="beaker acid" draggable="true">
+                <img src="assets/beaker1.png" alt="beaker" />
+                <p>CH₃COOH</p>
+              </div>
+            </div>
+            <div class="drop-zone" id="acid5">
+              <div id="beaker5" class="beaker acid" draggable="true">
+                <img src="assets/beaker2.png" alt="beaker" />
+                <p>H₃PO₄</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Base Only -->
+          <div class="beaker-grid-base">
+            <div class="drop-zone" id="base1">
+              <div id="beaker6" class="beaker base" draggable="true">
+                <img src="assets/beaker1.png" alt="beaker" />
+                <p>NaOH</p>
+              </div>
+            </div>
+            <div class="drop-zone" id="base2">
+              <div id="beaker7" class="beaker base" draggable="true">
+                <img src="assets/beaker2.png" alt="beaker" />
+                <p>KOH</p>
+              </div>
+            </div>
+            <div class="drop-zone" id="base3">
+              <div id="beaker8" class="beaker base" draggable="true">
+                <img src="assets/beaker3.png" alt="beaker" />
+                <p>Ca(OH)₂</p>
+              </div>
+            </div>
+            <div class="drop-zone" id="base4">
+              <div id="beaker9" class="beaker base" draggable="true">
+                <img src="assets/beaker1.png" alt="beaker" />
+                <p>NH₃</p>
+              </div>
+            </div>
+            <div class="drop-zone mgoh2" id="base5">
+              <div id="beaker10" class="beaker base" draggable="true">
+                <img src="assets/beaker2.png" alt="beaker" />
+                <p>Mg(OH)₂</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dialog -->
+    <div class="overlay">
+      <div class="dialog">
+        <img src="assets/scientist.png" alt="Scientist" class="dialog-image" />
+        <div>
+          <h2>Game Over</h2>
+          <button class="retry-btn">RETRY</button>
+          <button class="menu-btn">Back to Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/vlab-script.js"></script>
+  </body>
+</html>
