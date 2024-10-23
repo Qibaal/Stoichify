@@ -59,6 +59,7 @@ const bases = ["NaOH", "KOH", "Ca(OH)₂", "NH₃", "Mg(OH)₂"];
 
 let selectedAcid = null;
 let selectedBase = null;
+let selectedBeaker = null;
 
 const acidDropZone = document.getElementById("drop1");
 const baseDropZone = document.getElementById("drop2");
@@ -102,9 +103,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.querySelectorAll(".drop-zone div").forEach((beaker) => {
     beaker.addEventListener("dragstart", (e) => {
-      e.dataTransfer.setData("text/plain", e.target.id); 
+      e.dataTransfer.setData("text/plain", e.target.id);
     });
   });
+
+  document.querySelectorAll(".beaker").forEach((beaker) => {
+    beaker.addEventListener("click", function () {
+      selectedBeaker = this;
+    });
+  });
+
+  acidDropZone.addEventListener("click", function () {
+    pressDrop("acid");
+  });
+
+  baseDropZone.addEventListener("click", function () {
+    pressDrop("base");
+  });
+
 
   [acidDropZone, baseDropZone].forEach((dropZone) => {
     const observer = new MutationObserver(() => {
@@ -167,7 +183,36 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     checkReaction();
-    calculateProduct()
+    calculateProduct();
+  }
+
+  function pressDrop(type) {
+    if (selectedBeaker) {
+      const chemicalName = selectedBeaker.querySelector("p").textContent.trim();
+      const clonedElement = selectedBeaker.cloneNode(true);
+      clonedElement.id = selectedBeaker.id + "_" + Date.now();
+
+      if (type === "acid" && acids.includes(chemicalName)) {
+        acidDropZone.innerHTML = "";
+        acidDropZone.appendChild(clonedElement);
+        selectedAcid = chemicalName;
+      } else if (type === "base" && bases.includes(chemicalName)) {
+        baseDropZone.innerHTML = "";
+        baseDropZone.appendChild(clonedElement);
+        selectedBase = chemicalName;
+      } else {
+        return;
+      }
+
+      clonedElement.draggable = true;
+      clonedElement.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", e.target.id);
+      });
+
+      selectedBeaker = null;
+      checkReaction();
+      calculateProduct();
+    }
   }
 
   function checkReaction() {
@@ -197,15 +242,17 @@ document.addEventListener("DOMContentLoaded", function () {
   function calculateProduct() {
     if (selectedAcid && selectedBase) {
       // toggle carousel for visible
-      document.querySelectorAll(".mol-carousel").forEach(function(element) {
+      document.querySelectorAll(".mol-carousel").forEach(function (element) {
         // Ubah properti display menjadi "flex"
         element.style.display = "flex";
       });
 
-      document.querySelectorAll(".mol-result-container").forEach(function(element) {
-        // Ubah properti display menjadi "flex"
-        element.style.display = "block";
-      });
+      document
+        .querySelectorAll(".mol-result-container")
+        .forEach(function (element) {
+          // Ubah properti display menjadi "flex"
+          element.style.display = "block";
+        });
 
       // Reaktan
       const counter1 = parseInt(
@@ -217,31 +264,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const reactionKey = `${selectedAcid}+${selectedBase}`;
       const reverseReactionKey = `${selectedBase}+${selectedAcid}`;
-      const chemConstants = reactionConstants[reactionKey] || reactionConstants[reverseReactionKey];
+      const chemConstants =
+        reactionConstants[reactionKey] || reactionConstants[reverseReactionKey];
 
       let productTemp = 0;
 
       if (counter1 / chemConstants[0] <= counter2 / chemConstants[1]) {
-        productResult1.textContent =
-          parseFloat(((counter1 / chemConstants[0]) * chemConstants[2]).toFixed(2));
-        productResult2.textContent =
-          parseFloat(((counter1 / chemConstants[0]) * chemConstants[3]).toFixed(2));
-        productTemp = 
-          parseFloat(((counter1 / chemConstants[0]) * chemConstants[3]).toFixed(2));
+        productResult1.textContent = parseFloat(
+          ((counter1 / chemConstants[0]) * chemConstants[2]).toFixed(2)
+        );
+        productResult2.textContent = parseFloat(
+          ((counter1 / chemConstants[0]) * chemConstants[3]).toFixed(2)
+        );
+        productTemp = parseFloat(
+          ((counter1 / chemConstants[0]) * chemConstants[3]).toFixed(2)
+        );
       } else {
-        productResult1.textContent =
-          parseFloat(((counter2 / chemConstants[1]) * chemConstants[2]).toFixed(2));
-        productResult2.textContent =
-          parseFloat(((counter2 / chemConstants[1]) * chemConstants[3]).toFixed(2));
-        productTemp =
-          parseFloat(((counter2 / chemConstants[1]) * chemConstants[3]).toFixed(2));
+        productResult1.textContent = parseFloat(
+          ((counter2 / chemConstants[1]) * chemConstants[2]).toFixed(2)
+        );
+        productResult2.textContent = parseFloat(
+          ((counter2 / chemConstants[1]) * chemConstants[3]).toFixed(2)
+        );
+        productTemp = parseFloat(
+          ((counter2 / chemConstants[1]) * chemConstants[3]).toFixed(2)
+        );
       }
 
       if (productTemp == 0) {
         // toggle mol result visible
-        document.querySelector(".mol-result-container.two").style.display = "none";
+        document.querySelector(".mol-result-container.two").style.display =
+          "none";
       }
-      
     }
   }
 

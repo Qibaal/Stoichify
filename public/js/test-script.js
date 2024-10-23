@@ -112,6 +112,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  document.querySelectorAll(".beaker").forEach((beaker) => {
+    beaker.addEventListener("click", function () {
+      selectedBeaker = this;
+    });
+  });
+
+  acidDropZone.addEventListener("click", function () {
+    pressDrop("acid");
+  });
+
+  baseDropZone.addEventListener("click", function () {
+    pressDrop("base");
+  });
+
   [acidDropZone, baseDropZone].forEach((dropZone) => {
     const observer = new MutationObserver(() => {
       updateDropZoneBorder(dropZone);
@@ -162,6 +176,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     checkReaction();
   }
+
+    function pressDrop(type) {
+    if (selectedBeaker) {
+      const chemicalName = selectedBeaker.querySelector("p").textContent.trim();
+      const clonedElement = selectedBeaker.cloneNode(true);
+      clonedElement.id = selectedBeaker.id + "_" + Date.now();
+
+      if (type === "acid" && acids.includes(chemicalName)) {
+        acidDropZone.innerHTML = "";
+        acidDropZone.appendChild(clonedElement);
+        selectedAcid = chemicalName;
+      } else if (type === "base" && bases.includes(chemicalName)) {
+        baseDropZone.innerHTML = "";
+        baseDropZone.appendChild(clonedElement);
+        selectedBase = chemicalName;
+      } else {
+        return;
+      }
+
+      clonedElement.draggable = true;
+      clonedElement.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", e.target.id);
+      });
+
+      selectedBeaker = null;
+      checkReaction();
+      calculateProduct();
+    }
+  } 
 
   function checkReaction() {
     if (selectedAcid && selectedBase) {
