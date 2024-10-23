@@ -80,8 +80,6 @@ const correctIcon = document.querySelector(".correct-icon");
 const falseIcon = document.querySelector(".false-icon");
 const loseIcon = document.querySelector(".lose-icon");
 
-// const hearts = document.querySelectorAll(".heart");
-
 answer1.textContent = questions[currentQuestion].split(" + ")[0];
 answer2.textContent = questions[currentQuestion].split(" + ")[1];
 
@@ -93,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   acidDropZone.addEventListener("dragover", (e) => {
-    e.preventDefault(); // Enable the drop action for all drop zones
+    e.preventDefault(); 
   });
   acidDropZone.addEventListener("dragover", allowDrop);
   acidDropZone.addEventListener("drop", function (event) {
@@ -101,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   baseDropZone.addEventListener("dragover", (e) => {
-    e.preventDefault(); // Enable the drop action for all drop zones
+    e.preventDefault(); 
   });
   baseDropZone.addEventListener("dragover", allowDrop);
   baseDropZone.addEventListener("drop", function (event) {
@@ -110,11 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.querySelectorAll(".drop-zone div").forEach((beaker) => {
     beaker.addEventListener("dragstart", (e) => {
-      e.dataTransfer.setData("text/plain", e.target.id); // Store the ID of the dragged beaker
+      e.dataTransfer.setData("text/plain", e.target.id);
     });
   });
 
-  // Add and remove borders menurut state innerhtml
   [acidDropZone, baseDropZone].forEach((dropZone) => {
     const observer = new MutationObserver(() => {
       updateDropZoneBorder(dropZone);
@@ -144,23 +141,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const originalElement = document.getElementById(data);
     const chemicalName = originalElement.querySelector("p").textContent.trim();
 
-    // Create a clone of the dragged element
     const clonedElement = originalElement.cloneNode(true);
 
-    // Generate a unique ID for the cloned element
     clonedElement.id = originalElement.id + "_" + Date.now();
 
     if (type === "acid" && acids.includes(chemicalName)) {
-      acidDropZone.innerHTML = ""; // Clear the zone before adding new acid
+      acidDropZone.innerHTML = "";
       acidDropZone.appendChild(clonedElement);
       selectedAcid = chemicalName;
     } else if (type === "base" && bases.includes(chemicalName)) {
-      baseDropZone.innerHTML = ""; // Clear the zone before adding new base
+      baseDropZone.innerHTML = "";
       baseDropZone.appendChild(clonedElement);
       selectedBase = chemicalName;
     }
 
-    // Make the cloned element draggable
     clonedElement.draggable = true;
     clonedElement.addEventListener("dragstart", (e) => {
       e.dataTransfer.setData("text/plain", e.target.id);
@@ -223,18 +217,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (hearts.length === 1) {
           const overlay = document.querySelector(".overlay");
-          overlay.style.display = "flex"; // or 'block' depending on your CSS
+          overlay.style.display = "flex";
 
-          // Add event listeners to buttons
           const retryBtn = document.querySelector(".retry-btn");
           const menuBtn = document.querySelector(".menu-btn");
 
           retryBtn.addEventListener("click", () => {
-            window.location.reload(); // Refreshes the current page
+            window.location.reload();
           });
 
           menuBtn.addEventListener("click", () => {
-            window.location.href = "/index.html"; // Redirects to home page
+            window.location.href = "../index.html";
           });
         }
       }
@@ -250,30 +243,3 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// const reactions = {
-//   "HCl+NaOH": "NaCl + H₂O",
-//   "HCl+KOH": "KCl + H₂O",
-//   "HCl+Ca(OH)₂": "CaCl₂ + 2H₂O",
-//   "HCl+NH₃": "NH₄Cl",
-//   "2HCl+Mg(OH)₂": "MgCl₂ + 2H₂O",
-//   "H₂SO₄+2NaOH": "Na₂SO₄ + 2H₂O",
-//   "H₂SO₄+2KOH": "K₂SO₄ + 2H₂O",
-//   "H₂SO₄+Ca(OH)₂": "CaSO₄ + 2H₂O",
-//   "H₂SO₄+2NH₃": "(NH₄)₂SO₄",
-//   "H₂SO₄+Mg(OH)₂": "MgSO₄ + 2H₂O",
-//   "HNO₃+NaOH": "NaNO₃ + H₂O",
-//   "HNO₃+KOH": "KNO₃ + H₂O",
-//   "2HNO₃+Ca(OH)₂": "Ca(NO₃)₂ + 2H₂O",
-//   "HNO₃+NH₃": "NH₄NO₃",
-//   "2HNO₃+Mg(OH)₂": "Mg(NO₃)₂ + 2H₂O",
-//   "CH₃COOH+NaOH": "CH₃COONa + H₂O",
-//   "CH₃COOH+KOH": "CH₃COOK + H₂O",
-//   "2CH₃COOH+Ca(OH)₂": "(CH₃COO)₂Ca + 2H₂O",
-//   "CH₃COOH+NH₃": "CH₃COONH₄",
-//   "2CH₃COOH+Mg(OH)₂": "(CH₃COO)₂Mg + 2H₂O",
-//   "H₃PO₄+3NaOH": "Na₃PO₄ + 3H₂O",
-//   "H₃PO₄+3KOH": "K₃PO₄ + 3H₂O",
-//   "2H₃PO₄+3Ca(OH)₂": "Ca₃(PO₄)₂ + 6H₂O",
-//   "H₃PO₄+3NH₃": "(NH₄)₃PO₄",
-//   "2H₃PO₄+3Mg(OH)₂": "Mg₃(PO₄)₂ + 6H₂O"
-// };
