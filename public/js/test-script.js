@@ -202,7 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       selectedBeaker = null;
       checkReaction();
-      calculateProduct();
     }
   } 
 
