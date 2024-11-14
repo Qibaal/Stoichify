@@ -4,6 +4,8 @@
     "description": "Stoichify adalah aplikasi berbasis web yang dirancang untuk membantu mahasiswa TPB ITB dalam memahami konsep stoikiometri dan larutan asam-basa melalui simulasi laboratorium virtual. Aplikasi ini menyediakan pengalaman belajar interaktif di mana mahasiswa dapat mempelajari reaksi kimia asam-basa secara langsung, sekaligus mengeksplorasi konsep stoikiometri secara interaktif. Dengan menggunakan Stoichify, mahasiswa diharapkan dapat meningkatkan pemahaman terhadap konsep dasar kimia melalui latihan yang praktis. Web app ini terdiri dari 3 laman, yakni homepage, virtual lab, dan virtual lab test, dan telah dirancang secara responsif sehingga dapat diakses dengan baik melalui berbagai perangkat, baik desktop maupun mobile. Fitur interaksi seperti drag-and-drop di desktop dan press-to-select di mobile memastikan pengalaman pengguna tetap optimal dan intuitif di semua ukuran layar.",
     "main": "index.ts",
     "scripts": {
+        "build": "tsc",
+        "start": "node dist/index.js",
         "dev": "nodemon",
         "test": "echo \"Error: no test specified\" && exit 1",
         "build:css": "npx tailwindcss -i ./src/public/css/tailwind.css -o ./src/public/css/styles.css --watch"
