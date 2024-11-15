@@ -27,11 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
                 const data = await response.json();
                 console.log("User logged in:", data);
+                alert(`Selamat datang ${data.user.name}`)
 
                 window.location.href = "/virtual-lab";
             } else {
                 const errorData = await response.json();
-                console.error(`Login failed: ${errorData.message}`);
+                alert(`Login failed: ${errorData.message}`);
             }
         } catch (error) {
             console.error("An error occurred:", error);
